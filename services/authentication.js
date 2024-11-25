@@ -2,6 +2,8 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 import { auth } from "../config/firebase";
 
 
+// Function to log in a user
+// Returns an object with a boolean success value and a message
 const login = async(email, password) => {
     const response = {
         success: false,
@@ -10,9 +12,8 @@ const login = async(email, password) => {
 
     try{
         const request = await signInWithEmailAndPassword(auth, email, password)
-        console.log(request.user)
         response.success = true
-        response.message = request.user
+        response.message = request.user.uid
     }
     catch(e){
         response.success = false
@@ -21,19 +22,25 @@ const login = async(email, password) => {
     return response
 }
 
+// Function to sign up a new user
+// Returns an object with a boolean success value and a message
 const signUp = async(email, password) => {
-    
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up 
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+    const response = {
+        success: false,
+        message: ""
+    }
+
+    try{
+        const request = await createUserWithEmailAndPassword(auth, email, password)
+        console.log(request.user)
+        response.success = true
+        response.message = request.user.uid
+    }
+    catch(e){
+        response.success = false
+        response.message = e.message
+    }
+    return response
 }
 
 
@@ -82,4 +89,4 @@ const areFieldsValid = (email, password) => {
     return response
 }
 
-export { areFieldsValid, login }
+export { areFieldsValid, login, signUp }
