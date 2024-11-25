@@ -99,12 +99,7 @@ export const LoginScreen = ({setUser}) => {
                     }}
                 >
                     <Text
-                        style={{
-                            color: 'white',
-                            marginBottom: 50,
-                            padding: 12,
-
-                        }}
+                        style={styles.toggleText}
                     >{isLogin? `New to the app? Sign up` : `Already a user? Sign in`}</Text>    
                 </Pressable>
             </ImageBackground>

@@ -59,5 +59,10 @@ export default LoginScreenStyles = StyleSheet.create({
     btnText: {
         color: 'white',
         fontSize: 20,
+    },
+    toggleText: {
+        color: 'white',
+        marginBottom: 50,
+        padding: 12,
     }
 })
