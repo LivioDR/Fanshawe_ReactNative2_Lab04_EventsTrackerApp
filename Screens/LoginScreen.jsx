@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View, StyleSheet, Text, TextInput, ImageBackground, TouchableHighlight, Pressable } from "react-native";
+import { areFieldsValid, login } from "../services/authentication";
 
 
 const styles = StyleSheet.create({
@@ -71,8 +72,24 @@ export const LoginScreen = ({newUser = false}) => {
     const [isLogin, setIsLogin] = useState(!newUser)
     const [alert, setAlert] = useState("")
 
-    const onLoginPressed = () => {
-        console.log("Login pressed")
+    const onLoginPressed = async() => {
+        console.log(email)
+        console.log(pass)
+
+        const validation = areFieldsValid(email, pass)
+        
+        if(!validation.success){
+            setAlert(validation.message)
+            return
+        }
+
+        const loginResult = await login(email,pass)
+        if(!loginResult.success){
+            setAlert(loginResult.message)
+            return
+        }
+
+        setAlert(loginResult.message.uid)
     }
 
     const onRegisterPressed = () => {
@@ -95,6 +112,7 @@ export const LoginScreen = ({newUser = false}) => {
                         style={styles.input}
                         value={email}
                         onChangeText={setEmail}
+                        keyboardType="email"
                         />
 
                     <Text style={styles.label}>
@@ -104,6 +122,7 @@ export const LoginScreen = ({newUser = false}) => {
                         style={styles.input}
                         value={pass}
                         onChangeText={setPass}
+                        secureTextEntry={true}
                         />
 
                     <View style={styles.btnContainer}>
@@ -122,7 +141,7 @@ export const LoginScreen = ({newUser = false}) => {
                     </View>
                     {
                         alert &&
-                        <Text style={styles.alert}>Alert to be displayed here!</Text>
+                        <Text style={styles.alert}>{alert}</Text>
                     }
                 </View>
                 <Pressable
