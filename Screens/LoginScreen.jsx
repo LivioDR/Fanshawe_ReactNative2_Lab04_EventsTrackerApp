@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, StyleSheet, Text, TextInput, ImageBackground, TouchableHighlight, Pressable } from "react-native";
-import { areFieldsValid, login } from "../services/authentication";
+import { areFieldsValid, login, signUp } from "../services/authentication";
 
 
 const styles = StyleSheet.create({
@@ -65,17 +65,14 @@ const styles = StyleSheet.create({
     }
 })
 
-export const LoginScreen = ({newUser = false}) => {
+export const LoginScreen = ({setUser}) => {
 
     const [email, setEmail] = useState()
     const [pass, setPass] = useState()
-    const [isLogin, setIsLogin] = useState(!newUser)
+    const [isLogin, setIsLogin] = useState(true)
     const [alert, setAlert] = useState("")
 
     const onLoginPressed = async() => {
-        console.log(email)
-        console.log(pass)
-
         const validation = areFieldsValid(email, pass)
         
         if(!validation.success){
@@ -89,11 +86,24 @@ export const LoginScreen = ({newUser = false}) => {
             return
         }
 
-        setAlert(loginResult.message.uid)
+        setUser(loginResult.message)
     }
 
-    const onRegisterPressed = () => {
-        console.log("Register pressed")
+    const onRegisterPressed = async() => {
+        const validation = areFieldsValid(email, pass)
+        
+        if(!validation.success){
+            setAlert(validation.message)
+            return
+        }
+
+        const registerResult = await signUp(email,pass)
+        if(!registerResult.success){
+            setAlert(registerResult.message)
+            return
+        }
+
+        setUser(registerResult.message)
     }
 
     return(
