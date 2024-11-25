@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, StyleSheet, Text, TextInput, ImageBackground, TouchableHighlight } from "react-native";
+import { View, StyleSheet, Text, TextInput, ImageBackground, TouchableHighlight, Pressable } from "react-native";
 
 
 const styles = StyleSheet.create({
@@ -11,10 +11,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    title: {
+        color: 'white',
+        marginTop: 100,
+        fontSize: 30,
+        fontWeight: 100,
+    },
     formContainer: {
         width: '90%',
         margin: 'auto',
-        backgroundColor: '#3d3d3db0'
+        backgroundColor: '#3d3d3db0',
+        borderRadius: 10,
     },
     label: {
         fontSize: 20,
@@ -31,6 +38,12 @@ const styles = StyleSheet.create({
         width: '80%',
         marginHorizontal: '10%',
         padding: 10,
+        borderRadius: 5,
+    },
+    alert: {
+        color: 'white',
+        textAlign: 'center',
+        marginBottom: 10,
     },
     btnContainer: {
         marginVertical: 30,
@@ -51,10 +64,20 @@ const styles = StyleSheet.create({
     }
 })
 
-export const LoginScreen = () => {
+export const LoginScreen = ({newUser = false}) => {
 
     const [email, setEmail] = useState()
     const [pass, setPass] = useState()
+    const [isLogin, setIsLogin] = useState(!newUser)
+    const [alert, setAlert] = useState("")
+
+    const onLoginPressed = () => {
+        console.log("Login pressed")
+    }
+
+    const onRegisterPressed = () => {
+        console.log("Register pressed")
+    }
 
     return(
         <View style={styles.container}>
@@ -62,6 +85,7 @@ export const LoginScreen = () => {
                 style={styles.bgImage}
                 source={require('../assets/loginBg.jpg')}
                 >
+                <Text style={styles.title}>Speak friend and enter</Text>
                 <View style={styles.formContainer}>
 
                     <Text style={styles.label}>
@@ -87,15 +111,34 @@ export const LoginScreen = () => {
                             style={styles.btnHighlight}
                             activeOpacity={0.6}
                             underlayColor={'teal'}
-                            onPress={()=>{console.log("Pressed!")}}
+                            onPress={isLogin ? 
+                                onLoginPressed : 
+                                onRegisterPressed}
                             >
                                 <Text style={styles.btnText}>
-                                    Login
+                                    {isLogin ? "Login" : "Register"}
                                 </Text>
                         </TouchableHighlight>
                     </View>
-                        
+                    {
+                        alert &&
+                        <Text style={styles.alert}>Alert to be displayed here!</Text>
+                    }
                 </View>
+                <Pressable
+                    onPressOut={()=>{
+                        setIsLogin(prev => !prev)
+                    }}
+                >
+                    <Text
+                        style={{
+                            color: 'white',
+                            marginBottom: 50,
+                            padding: 12,
+
+                        }}
+                    >{isLogin? `New to the app? Sign up` : `Already a user? Sign in`}</Text>    
+                </Pressable>
             </ImageBackground>
         </View>
     )
