@@ -11,6 +11,8 @@ export const EventsScreen = ({events,uid}) => {
                 keyExtractor={item => item.id}
                 renderItem={item => 
                     <EventCard 
+                    id={item.item.id}
+                    interactive={true}
                     name={item.item.name} 
                     uid={uid} 
                     createdBy={item.item.createdBy} 

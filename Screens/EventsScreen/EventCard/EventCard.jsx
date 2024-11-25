@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import styles from "./EventCardStyles";
 const moment = require('moment')
 
 
-export const EventCard = ({name, starts, uid, createdBy, favorites}) => {
+export const EventCard = ({name, starts, uid, id, createdBy, favorites, interactive = false}) => {
 
     const [isFav, setIsFav] = useState(favorites.includes(uid))
 
@@ -13,6 +14,34 @@ export const EventCard = ({name, starts, uid, createdBy, favorites}) => {
     const startsDate = new Date(starts)
     const relativeTime = moment().subtract((currentDate.getTime() - startsDate.getTime())/1000, 's').fromNow()
     
+    // Setting up the navigation to the detail page
+    const navigation = useNavigation()
+    const onTouch = () => {
+        navigation.navigate("Event details", {
+            name: name,
+            starts: starts,
+            createdBy: createdBy,
+            favorites: favorites,
+            id: id,
+        })
+    }
+
+    if(interactive){
+        return(
+            <Pressable
+                onPress={onTouch}
+            >
+                <View style={styles.container}>
+                    <View style={styles.dateRow}>
+                        <Text style={styles.date}>{starts.split("T").join(" @ ")}</Text>
+                        {isFav ? <Ionicons name="star" color={'gold'} size={16} /> : <></>}
+                    </View>
+                    <Text style={styles.title}>{name}</Text>
+                    <Text style={styles.relative}>{relativeTime}</Text>
+                </View>            
+            </Pressable>
+        )
+    }
 
     return(
         <View style={styles.container}>
