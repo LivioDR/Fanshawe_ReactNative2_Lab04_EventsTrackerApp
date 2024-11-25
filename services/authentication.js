@@ -1,6 +1,26 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 
+
+// Function to check if the user is currently logged in or not
+// If it is logged in, it returns true and the uid
+const isUserLoggedIn = async() => {
+    const response = {
+        success: false,
+        message: "",
+    }
+    
+    const status = await onAuthStateChanged(auth, (user) => {
+        if (user) {
+            response.success = true
+            response.message = user.uid
+        } else {
+            response.success = false
+        }
+    })
+
+    return response
+}
 
 // Function to log in a user
 // Returns an object with a boolean success value and a message
@@ -20,6 +40,15 @@ const login = async(email, password) => {
         response.message = e.message
     }
     return response
+}
+
+// Function to log out a user
+const logout = async(setUser) => {
+    signOut(auth).then(() => {
+        setUser(undefined)
+      }).catch((error) => {
+        console.e(error)
+      });
 }
 
 // Function to sign up a new user
@@ -89,4 +118,4 @@ const areFieldsValid = (email, password) => {
     return response
 }
 
-export { areFieldsValid, login, signUp }
+export { areFieldsValid, isUserLoggedIn, login, logout, signUp }
