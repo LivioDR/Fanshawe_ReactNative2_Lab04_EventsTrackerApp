@@ -36,6 +36,6 @@ export default function App() {
   }
 
   return(
-    <EventTabsScreen loading={loading} events={events} uid={user} logout={()=>{logout(setUser)}}/>
+    <EventTabsScreen loading={loading} setter={setEvents} events={events} uid={user} logout={()=>{logout(setUser)}}/>
   )
 }

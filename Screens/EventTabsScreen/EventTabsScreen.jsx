@@ -7,12 +7,12 @@ import { NavigationContainer } from '@react-navigation/native';
 
 // Styling imports
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { EventsScreen } from '../EventsScreen/EventsScreen';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import { FavsScreen } from '../FavsScreen/FavsScreen';
+import { EventStackContainer } from '../EventStackContainer/EventStackContainer';
 
 
-export const EventTabsScreen = ({events, loading, logout, uid}) => {
+export const EventTabsScreen = ({events, setter, loading, logout, uid}) => {
 
     const Tab = createBottomTabNavigator()
 
@@ -25,7 +25,7 @@ export const EventTabsScreen = ({events, loading, logout, uid}) => {
             }}>
                 <Tab.Screen 
                 name="Events"
-                children={() => loading ? <LoadingScreen/> : <EventsScreen uid={uid} events={events}/>}
+                children={() => loading ? <LoadingScreen/> : <EventStackContainer setter={setter} uid={uid} events={events}/>}
                 options={{
                 tabBarIcon: ({ color, size }) => (
                     <Ionicons
