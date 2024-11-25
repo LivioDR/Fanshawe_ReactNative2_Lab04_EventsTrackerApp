@@ -1,69 +1,8 @@
 import { useState } from "react";
-import { View, StyleSheet, Text, TextInput, ImageBackground, TouchableHighlight, Pressable } from "react-native";
-import { areFieldsValid, login, signUp } from "../services/authentication";
+import { View, Text, TextInput, ImageBackground, TouchableHighlight, Pressable } from "react-native";
+import { areFieldsValid, login, signUp } from "../../services/authentication";
+import styles from "./LoginScreenStyles";
 
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    bgImage: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        color: 'white',
-        marginTop: 100,
-        fontSize: 30,
-        fontWeight: 100,
-    },
-    formContainer: {
-        width: '90%',
-        margin: 'auto',
-        backgroundColor: '#3d3d3db0',
-        borderRadius: 10,
-    },
-    label: {
-        fontSize: 20,
-        fontWeight: 800,
-        paddingTop: 12,
-        paddingBottom: 5,
-        color: 'white',
-        alignSelf: 'flex-start',
-        marginLeft: '10%',
-    },
-    input: {
-        backgroundColor: 'white',
-        color: 'black',
-        width: '80%',
-        marginHorizontal: '10%',
-        padding: 10,
-        borderRadius: 5,
-    },
-    alert: {
-        color: 'white',
-        textAlign: 'center',
-        marginBottom: 10,
-    },
-    btnContainer: {
-        marginVertical: 30,
-        width: '60%',
-        margin: 'auto',
-        backgroundColor: 'grey',
-        borderRadius: 50,
-    },
-    btnHighlight: {
-        paddingVertical: 10,
-        width: '100%',
-        alignItems: 'center',
-        borderRadius: 50,
-    },
-    btnText: {
-        color: 'white',
-        fontSize: 20,
-    }
-})
 
 export const LoginScreen = ({setUser}) => {
 
@@ -110,7 +49,7 @@ export const LoginScreen = ({setUser}) => {
         <View style={styles.container}>
             <ImageBackground 
                 style={styles.bgImage}
-                source={require('../assets/loginBg.jpg')}
+                source={require('../../assets/loginBg.jpg')}
                 >
                 <Text style={styles.title}>Speak friend and enter</Text>
                 <View style={styles.formContainer}>
