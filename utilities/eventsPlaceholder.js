@@ -9,6 +9,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-21T12:30:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
         "favorites": ["u1t3eZPwcFZiyxJqRzIwcrxmmwX2"],
+        "location": "Bag End, Hobbiton, The Shire",
     },
     {
         "id": getRandomId(),
@@ -16,6 +17,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-22T09:15:00", 
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
         "favorites": [],
+        "location": "East of Rivendell, Misty Mountains",
     },
     {
         "id": getRandomId(),
@@ -23,6 +25,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-23T14:45:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
         "favorites": ["O5aAoLGOhqbaRT4twdpV22YWiM13","u1t3eZPwcFZiyxJqRzIwcrxmmwX2"],
+        "location": "Mines of Moria, Misty Mountains",
     },
     {
         "id": getRandomId(),
@@ -30,6 +33,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-24T11:00:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
         "favorites": [],
+        "location": "Rivendell, House of Elrond",
     },
     {
         "id": getRandomId(),
@@ -37,6 +41,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-25T16:30:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
         "favorites": [],
+        "location": "Amon Hen, Gondor",
     },
     {
         "id": getRandomId(),
@@ -44,6 +49,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-26T10:00:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
         "favorites": [],
+        "location": "Helm's Deep, Rohan",
     },
     {
         "id": getRandomId(),
@@ -51,6 +57,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-27T08:45:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
         "favorites": ["O5aAoLGOhqbaRT4twdpV22YWiM13"],
+        "location": "Pelennor Fields, Gondor",
     },
     {
         "id": getRandomId(),
@@ -58,6 +65,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-28T13:20:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
         "favorites": ["u1t3eZPwcFZiyxJqRzIwcrxmmwX2"],
+        "location": "Goblin Caves, Misty Mountains",
     },
     {
         "id": getRandomId(),
@@ -65,6 +73,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-29T15:55:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
         "favorites": ["u1t3eZPwcFZiyxJqRzIwcrxmmwX2"],
+        "location": "Goblin Town, Underground Misty Mountains",
     },
     {
         "id": getRandomId(),
@@ -72,6 +81,7 @@ export const eventsPlaceholder = [
         "starts": "2024-11-30T07:30:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
         "favorites": [],
+        "location": "Lonely Mountain, Dale",
     },
     {
         "id": getRandomId(),
@@ -79,6 +89,7 @@ export const eventsPlaceholder = [
         "starts": "2024-12-01T12:15:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
         "favorites": ["O5aAoLGOhqbaRT4twdpV22YWiM13","u1t3eZPwcFZiyxJqRzIwcrxmmwX2"],
+        "location": "Minas Tirith, Gondor",
     },
     {
         "id": getRandomId(),
@@ -86,6 +97,7 @@ export const eventsPlaceholder = [
         "starts": "2024-12-02T16:00:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
         "favorites": ["O5aAoLGOhqbaRT4twdpV22YWiM13"],
+        "location": "Road to Rivendell, near Bruinen River",
     },
     {
         "id": getRandomId(),
@@ -93,6 +105,7 @@ export const eventsPlaceholder = [
         "starts": "2024-12-03T09:45:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
         "favorites": [],
+        "location": "Pelennor Fields, Outside Minas Tirith",
     },
     {
         "id": getRandomId(),
@@ -100,5 +113,6 @@ export const eventsPlaceholder = [
         "starts": "2024-12-04T11:30:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
         "favorites": ["O5aAoLGOhqbaRT4twdpV22YWiM13","u1t3eZPwcFZiyxJqRzIwcrxmmwX2"],
+        "location": "Mount Doom, Mordor",
     }
 ]
