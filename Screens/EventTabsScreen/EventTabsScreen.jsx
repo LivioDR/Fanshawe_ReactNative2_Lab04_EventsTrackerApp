@@ -7,9 +7,11 @@ import { NavigationContainer } from '@react-navigation/native';
 
 // Styling imports
 import Ionicons from '@expo/vector-icons/Ionicons';
+
+// Components and screens imports
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
-import { FavsScreen } from '../FavsScreen/FavsScreen';
 import { EventStackContainer } from '../EventStackContainer/EventStackContainer';
+import { FavsScreen } from '../FavsScreen/FavsScreen';
 
 
 export const EventTabsScreen = ({events, setter, loading, logout, uid}) => {
