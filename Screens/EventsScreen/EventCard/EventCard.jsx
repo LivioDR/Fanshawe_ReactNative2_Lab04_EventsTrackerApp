@@ -6,7 +6,7 @@ import styles from "./EventCardStyles";
 const moment = require('moment')
 
 
-export const EventCard = ({name, starts, uid, id, createdBy, favorites, interactive = false}) => {
+export const EventCard = ({name, starts, uid, id, createdBy, favorites, location, interactive = false}) => {
 
     const [isFav, setIsFav] = useState(favorites.includes(uid))
 
@@ -23,6 +23,7 @@ export const EventCard = ({name, starts, uid, id, createdBy, favorites, interact
             createdBy: createdBy,
             favorites: favorites,
             id: id,
+            location: location,
         })
     }
 

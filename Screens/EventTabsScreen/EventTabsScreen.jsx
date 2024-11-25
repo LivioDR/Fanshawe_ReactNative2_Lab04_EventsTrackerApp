@@ -52,7 +52,7 @@ export const EventTabsScreen = ({events, setter, loading, logout, uid}) => {
 
                 <Tab.Screen
                 name="Favorites"
-                children={()=> <FavsScreen uid={uid} events={events}/>}
+                children={()=> <FavsScreen uid={uid} events={events} setter={setter}/>}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons

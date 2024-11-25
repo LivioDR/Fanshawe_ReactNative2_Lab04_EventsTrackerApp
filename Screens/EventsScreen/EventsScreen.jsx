@@ -18,6 +18,7 @@ export const EventsScreen = ({events,uid}) => {
                     createdBy={item.item.createdBy} 
                     starts={item.item.starts} 
                     favorites={item.item.favorites}
+                    location={item.item.location}
                     />}
             />
         </View>

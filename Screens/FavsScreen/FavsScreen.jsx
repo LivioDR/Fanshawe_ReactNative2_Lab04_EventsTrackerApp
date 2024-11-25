@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FlatList, View } from "react-native";
 import { EventCard } from "../EventsScreen/EventCard/EventCard";
 
-export const FavsScreen = ({events,uid}) => {
+export const FavsScreen = ({events,uid, setter}) => {
 
     const [favEvents, setFavEvents] = useState(events.filter(event => event.favorites.includes(uid)))
 
@@ -21,6 +21,7 @@ export const FavsScreen = ({events,uid}) => {
                     createdBy={item.item.createdBy} 
                     starts={item.item.starts} 
                     favorites={item.item.favorites}
+                    location={item.item.location}
                     />}
             />
         </View>
