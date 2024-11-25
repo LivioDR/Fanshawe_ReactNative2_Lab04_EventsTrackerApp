@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LoginScreen } from './Screens/LoginScreen/LoginScreen';
 import { isUserLoggedIn } from './services/authentication';
-import LoggedInPlaceholder from './Screens/LoggedInPlaceholder';
 import { EventsScreen } from './Screens/EventsScreen/EventsScreen';
 
 export default function App() {
