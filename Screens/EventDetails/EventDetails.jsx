@@ -1,6 +1,6 @@
 // React imports
 import { View, Text, TouchableHighlight, TextInput } from "react-native";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 // Navigation imports
@@ -25,12 +25,6 @@ export const EventDetails = ({setter, uid}) => {
     const [eventData, setEventData] = useState(event)
     const [editMode, setEditMode] = useState(false)
     const [isProcessing, setIsProcessing] = useState(false)
-
-    // DEBUG ONLY. TODO: REMOVE AFTER TESTING
-    useEffect(()=>{
-        console.log(eventData)
-    },[eventData])
-    // DEBUG ONLY
 
 
     // Function to update the event data in Firebase and locally
@@ -124,7 +118,6 @@ export const EventDetails = ({setter, uid}) => {
                 style={styles.title}
                 value={eventData.name}
                 onChange={(e) => {
-                    console.log(e.nativeEvent.text)
                     setEventData(prev => {
                         let newData = {...prev}
                         newData.name = e.nativeEvent.text
