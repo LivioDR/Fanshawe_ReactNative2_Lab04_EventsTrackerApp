@@ -1,5 +1,6 @@
 // React imports
 import { Pressable, Text, View } from 'react-native';
+import { useState } from 'react';
 
 // Navigation imports
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -18,6 +19,10 @@ export const EventTabsScreen = ({events, setter, loading, logout, uid}) => {
 
     const Tab = createBottomTabNavigator()
 
+    const [showAddEvent, setShowAddEvent] = useState(false)
+
+    const hideModal = () => {setShowAddEvent(false)}
+
     return(
         <NavigationContainer>
             <Tab.Navigator
@@ -27,7 +32,7 @@ export const EventTabsScreen = ({events, setter, loading, logout, uid}) => {
             }}>
                 <Tab.Screen 
                 name="Events"
-                children={() => loading ? <LoadingScreen/> : <EventStackContainer setter={setter} uid={uid} events={events}/>}
+                children={() => loading ? <LoadingScreen/> : <EventStackContainer setter={setter} uid={uid} events={events} showModal={showAddEvent} hideModal={hideModal}/>}
                 options={{
                 tabBarIcon: ({ color, size }) => (
                     <Ionicons
@@ -46,6 +51,16 @@ export const EventTabsScreen = ({events, setter, loading, logout, uid}) => {
                         <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 10,}}>
                             <Ionicons name='arrow-back'/>
                             <Text style={{paddingHorizontal: 5,}}>Log Out</Text>
+                        </View>
+                    </Pressable>
+                ),
+                headerRight: ()=>(
+                    <Pressable
+                        onPressOut={()=>{setShowAddEvent(true)}}
+                    >
+                        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 10,}}>
+                            <Ionicons name='add'/>
+                            <Text style={{paddingHorizontal: 5,}}>Add Event</Text>
                         </View>
                     </Pressable>
                 )

@@ -3,7 +3,7 @@ import { EventsScreen } from "../EventsScreen/EventsScreen";
 import { EventDetails } from "../EventDetails/EventDetails";
 
 
-export const EventStackContainer = ({events, setter, uid}) => {
+export const EventStackContainer = ({events, setter, uid, showModal, hideModal}) => {
 
     const Stack = createNativeStackNavigator()
 
@@ -11,7 +11,7 @@ export const EventStackContainer = ({events, setter, uid}) => {
         <Stack.Navigator initialRouteName="Events List">
             <Stack.Screen
                 name="Events List"
-                children={() => <EventsScreen events={events} uid={uid}/>}
+                children={() => <EventsScreen events={events} uid={uid} showModal={showModal} hideModal={hideModal}/>}
                 options={{
                     headerShown: false,
                 }}

@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { View, Text, TextInput, Modal } from "react-native";
+import { View, Text, TextInput, Modal, TouchableHighlight } from "react-native";
+
+// Styling imports
+import Ionicons from '@expo/vector-icons/Ionicons';
 import styles from "./AddEventStyles";
 
 
@@ -35,7 +38,7 @@ export const AddEvent = ({uid, visible, hide}) => {
         <Modal
         transparent={false}
         visible={visible}
-
+        animationType="slide"
         >
             <View style={{
                 flex: 1,
@@ -47,6 +50,7 @@ export const AddEvent = ({uid, visible, hide}) => {
                 style={styles.title}
                 value={name}
                 onChange={setName}
+                placeholder="Event Name"
                 />
                 <View style={styles.detailContainer}>
                     <Ionicons name="calendar-outline" size={styles.icons.size} color={'purple'} />
