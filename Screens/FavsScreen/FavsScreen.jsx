@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FlatList, View } from "react-native";
 import { EventCard } from "../EventsScreen/EventCard/EventCard";
 
 export const FavsScreen = ({events,uid, setter}) => {
 
     const [favEvents, setFavEvents] = useState(events.filter(event => event.favorites.includes(uid)))
+
+    useEffect(()=>{
+        setFavEvents(events.filter(event => event.favorites.includes(uid)))
+    },[events])
 
     return(
         <View style={{
