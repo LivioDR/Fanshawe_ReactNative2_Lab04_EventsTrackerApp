@@ -11,7 +11,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import styles from "./EventDetailsStyles";
 
 // Database imports
-import { updateEventInDb, deleteEventById } from '../../services/database.js' 
+import { updateEventInDb, deleteEventById, toggleFavoriteById } from '../../services/database.js' 
 
 
 export const EventDetails = ({setter, uid}) => {
@@ -79,7 +79,7 @@ export const EventDetails = ({setter, uid}) => {
     }
 
     // Function to update the favorite status in Firebase and locally
-    const toggleFav = () => {
+    const toggleFav = async() => {
         setIsProcessing(true)
         // Updates the favorite status in the state variable
         setter(prev => {
@@ -107,7 +107,10 @@ export const EventDetails = ({setter, uid}) => {
             }
             return newData
         })
-        // TODO: code function to toggle fav in Firebase
+        // Last, toggles the favorite status in Firebase
+        await toggleFavoriteById(eventData.id, uid)
+
+        // And enables the buttons again before returning
         setIsProcessing(false)
     }
 
