@@ -1,6 +1,7 @@
 // React imports
 import { View, Text, TouchableHighlight, TextInput } from "react-native";
 import { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 // Navigation imports
 import { useRoute } from "@react-navigation/native";
@@ -15,6 +16,9 @@ export const EventDetails = ({setter, uid}) => {
     // getting the data for the screen from the route params
     const route = useRoute()
     const event = route.params
+
+    // getting the navigate object to navigate back when deleting the event
+    const navigation = useNavigation()
 
     // setting local state variables to handle UI changes when the data changes
     const [isOwnEvent, setIsOwnEvent] = useState(uid === event.createdBy ? true : false)
@@ -50,6 +54,28 @@ export const EventDetails = ({setter, uid}) => {
         })
 
         setEditMode(false)
+    }
+
+    // Function to remove the event in Firebase and locally
+    const removeEvent = () => {
+        setIsProcessing(true)
+
+        // removes the event locally
+        setter(prev => {
+            let newData = [...prev]
+            newData = newData.filter(event => event.id != eventData.id)
+            return newData
+        })
+
+        // TODO: remove event from Firebase with ID
+
+
+        // enabling again the buttons
+        setIsProcessing(false)
+
+        // navigate back to the list after processing the data deletion
+        navigation.goBack()
+
     }
 
     // Function to update the favorite status in Firebase and locally
@@ -194,24 +220,36 @@ export const EventDetails = ({setter, uid}) => {
             <View style={styles.btn}>
                 {
                     isOwnEvent &&
-                <TouchableHighlight
-                activeOpacity={0.6}
-                underlayColor={'yellow'}
-                onPress={()=>{setEditMode(true)}}
-                disabled={isProcessing}
-                >
-                <Text style={styles.btnText}>Edit event</Text>
-                </TouchableHighlight>
+                    <>
+                    <TouchableHighlight
+                    activeOpacity={0.6}
+                    underlayColor={'yellow'}
+                    onPress={()=>{setEditMode(true)}}
+                    disabled={isProcessing}
+                    >
+                    <Text style={styles.btnText}>Edit event</Text>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight
+                    activeOpacity={0.6}
+                    underlayColor={'yellow'}
+                    onPress={removeEvent}
+                    disabled={isProcessing}
+                    >
+                    <Text style={styles.btnText}>Delete event</Text>
+                    </TouchableHighlight>
+                    </>
                 }
+            </View>
                 <TouchableHighlight
                     activeOpacity={0.6}
                     underlayColor={'yellow'}
                     onPress={toggleFav}
                     disabled={isProcessing}
+                    style={{marginTop: 50,}}
                 >
                     <Text style={styles.btnText}>{eventData.favorites.includes(uid) ? "Remove from favorites" : "Add to favorites"}</Text>
                 </TouchableHighlight>
-            </View>
         </View>
     )
 }
