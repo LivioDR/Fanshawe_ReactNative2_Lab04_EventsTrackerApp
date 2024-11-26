@@ -1,5 +1,5 @@
 import { db } from "../config/firebase";
-import { collection, getDocs, doc, updateDoc, setDoc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, updateDoc, setDoc, deleteDoc } from "firebase/firestore";
 
 const collectionName = "events"
 
@@ -18,6 +18,14 @@ const getAllEvents = async() => {
     return events
 }
 
+// Gets a single event by its ID
+const getEventById = async(id) => {
+    const eventRef = doc(db, collectionName, id);
+    const eventSnap = await getDoc(eventRef);
+    return eventSnap.data()
+}
+
+// Function to update the data in an event
 const updateEventInDb = async(data) => {
     // getting the ID from the event and making sure it is a String
     const id = String(data.id)
@@ -60,7 +68,26 @@ const deleteEventById = async(id) => {
     await deleteDoc(doc(db, collectionName, id));
 }
 
-const toggleFavoriteById = (id, uid) => {
+// Function to toggle the favorite status for a user with a certain uid
+const toggleFavoriteById = async(id, uid) => {
+    // gets that event info
+    const event = await getEventById(id)
+
+    // checks if the user is part of the favorite array or not
+    if(event.favorites.includes(uid)){
+        // then removes the user
+        event.favorites = event.favorites.filter(ids => ids != uid)
+    }
+    else{
+        // or adds it
+        event.favorites.push(uid)
+    }
+
+    // last, updates the event info in firebase
+    await updateEventInDb({
+        id: id,
+        ...event
+    })
 
 }
 
