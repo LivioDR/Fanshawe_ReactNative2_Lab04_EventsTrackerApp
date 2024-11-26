@@ -20,6 +20,7 @@ export const FavsScreen = ({events,uid, setter}) => {
                 keyExtractor={item => item.id}
                 renderItem={item => 
                     <EventCard
+                    setter={setter}
                     id={item.item.id} 
                     name={item.item.name} 
                     uid={uid} 

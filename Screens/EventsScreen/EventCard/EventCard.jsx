@@ -6,7 +6,7 @@ import styles from "./EventCardStyles";
 const moment = require('moment')
 
 
-export const EventCard = ({name, starts, uid, id, createdBy, favorites, location, interactive = false}) => {
+export const EventCard = ({name, starts, uid, id, createdBy, favorites, location, interactive = false, setter = ()=>{}}) => {
 
     const [isFav, setIsFav] = useState(favorites.includes(uid))
 
@@ -26,6 +26,21 @@ export const EventCard = ({name, starts, uid, id, createdBy, favorites, location
             location: location,
             relativeTime: relativeTime,
         })
+    }
+
+    const removeFavorite = () => {
+        // Removes the favorite from the state variable
+        setter(prev => {
+            let newData = [...prev]
+            for(let i=0; i<newData.length; i++){
+                if(newData[i].id === id){
+                    newData[i].favorites = newData[i].favorites.filter(id => id != uid)
+                }
+            }
+            return newData
+        })
+        
+        // TODO: remove favorite from Firebase
     }
 
     // Changes the icon on the card every time that the favorites parameter is changed
@@ -59,9 +74,7 @@ export const EventCard = ({name, starts, uid, id, createdBy, favorites, location
             padding: 0,
         }}>
             <Pressable
-                onPress={()=>{
-                    console.log("Fav touched!", id)
-                }}
+                onPress={removeFavorite}
                 style={{
                     width: '10%',
                     alignItems: 'center',
