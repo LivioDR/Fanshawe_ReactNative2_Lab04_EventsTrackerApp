@@ -31,11 +31,12 @@ export default EventDetailsStyles = StyleSheet.create({
     btn: {
         marginTop: 50,
         backgroundColor: 'gold',
-        padding: 20,
         borderRadius: 10,
     },
     btnText: {
         color: 'black',
         fontSize: 18,
+        padding: 20,
+        marginVertical: 0,
     }
 })

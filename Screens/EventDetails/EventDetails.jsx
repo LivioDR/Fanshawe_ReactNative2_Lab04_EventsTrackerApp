@@ -88,7 +88,7 @@ export const EventDetails = ({setter, uid}) => {
             <View style={styles.btn}>
                 <TouchableHighlight
                     activeOpacity={0.6}
-                    underlayColor={'teal'}
+                    underlayColor={'yellow'}
                     onPress={toggleFav}
                     disabled={isProcessing}
                 >

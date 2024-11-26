@@ -78,7 +78,7 @@ export const LoginScreen = ({setUser}) => {
                         <TouchableHighlight
                             style={styles.btnHighlight}
                             activeOpacity={0.6}
-                            underlayColor={'teal'}
+                            underlayColor={'black'}
                             onPress={isLogin ? 
                                 onLoginPressed : 
                                 onRegisterPressed}
