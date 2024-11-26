@@ -4,7 +4,7 @@ const getRandomId = () => {
 
 export const eventsPlaceholder = [
     {
-        "id": getRandomId(),
+        "id": 1,
         "name": "Unexpected Party at Bag End",
         "starts": "2024-11-21T12:30:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
@@ -12,7 +12,7 @@ export const eventsPlaceholder = [
         "location": "Bag End, Hobbiton, The Shire",
     },
     {
-        "id": getRandomId(),
+        "id": 2,
         "name": "Trolls Encounter",
         "starts": "2024-11-22T09:15:00", 
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
@@ -20,7 +20,7 @@ export const eventsPlaceholder = [
         "location": "East of Rivendell, Misty Mountains",
     },
     {
-        "id": getRandomId(),
+        "id": 3,
         "name": "Battle of Moria",
         "starts": "2024-11-23T14:45:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
@@ -28,7 +28,7 @@ export const eventsPlaceholder = [
         "location": "Mines of Moria, Misty Mountains",
     },
     {
-        "id": getRandomId(),
+        "id": 4,
         "name": "Council of Elrond",
         "starts": "2024-11-24T11:00:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
@@ -36,7 +36,7 @@ export const eventsPlaceholder = [
         "location": "Rivendell, House of Elrond",
     },
     {
-        "id": getRandomId(),
+        "id": 5,
         "name": "Breaking of the Fellowship",
         "starts": "2024-11-25T16:30:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
@@ -44,7 +44,7 @@ export const eventsPlaceholder = [
         "location": "Amon Hen, Gondor",
     },
     {
-        "id": getRandomId(),
+        "id": 6,
         "name": "Helm's Deep Battle",
         "starts": "2024-11-26T10:00:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
@@ -52,7 +52,7 @@ export const eventsPlaceholder = [
         "location": "Helm's Deep, Rohan",
     },
     {
-        "id": getRandomId(),
+        "id": 7,
         "name": "Battle of Pelennor Fields",
         "starts": "2024-11-27T08:45:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
@@ -60,7 +60,7 @@ export const eventsPlaceholder = [
         "location": "Pelennor Fields, Gondor",
     },
     {
-        "id": getRandomId(),
+        "id": 8,
         "name": "Riddles in the Dark",
         "starts": "2024-11-28T13:20:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
@@ -68,7 +68,7 @@ export const eventsPlaceholder = [
         "location": "Goblin Caves, Misty Mountains",
     },
     {
-        "id": getRandomId(),
+        "id": 9,
         "name": "Escape from Goblin Town",
         "starts": "2024-11-29T15:55:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
@@ -76,7 +76,7 @@ export const eventsPlaceholder = [
         "location": "Goblin Town, Underground Misty Mountains",
     },
     {
-        "id": getRandomId(),
+        "id": 10,
         "name": "Battle of the Five Armies",
         "starts": "2024-11-30T07:30:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
@@ -84,7 +84,7 @@ export const eventsPlaceholder = [
         "location": "Lonely Mountain, Dale",
     },
     {
-        "id": getRandomId(),
+        "id": 11,
         "name": "Siege of Gondor",
         "starts": "2024-12-01T12:15:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
@@ -92,7 +92,7 @@ export const eventsPlaceholder = [
         "location": "Minas Tirith, Gondor",
     },
     {
-        "id": getRandomId(),
+        "id": 12,
         "name": "Flight to the Ford",
         "starts": "2024-12-02T16:00:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
@@ -100,7 +100,7 @@ export const eventsPlaceholder = [
         "location": "Road to Rivendell, near Bruinen River",
     },
     {
-        "id": getRandomId(),
+        "id": 13,
         "name": "Battle of the Pelennor Fields",
         "starts": "2024-12-03T09:45:00",
         "createdBy": "u1t3eZPwcFZiyxJqRzIwcrxmmwX2",
@@ -108,7 +108,7 @@ export const eventsPlaceholder = [
         "location": "Pelennor Fields, Outside Minas Tirith",
     },
     {
-        "id": getRandomId(),
+        "id":14,
         "name": "Destruction of the One Ring",
         "starts": "2024-12-04T11:30:00",
         "createdBy": "O5aAoLGOhqbaRT4twdpV22YWiM13",
