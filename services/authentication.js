@@ -61,7 +61,6 @@ const signUp = async(email, password) => {
 
     try{
         const request = await createUserWithEmailAndPassword(auth, email, password)
-        console.log(request.user)
         response.success = true
         response.message = request.user.uid
     }
