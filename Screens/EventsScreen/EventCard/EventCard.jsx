@@ -24,6 +24,7 @@ export const EventCard = ({name, starts, uid, id, createdBy, favorites, location
             favorites: favorites,
             id: id,
             location: location,
+            relativeTime: relativeTime,
         })
     }
 
