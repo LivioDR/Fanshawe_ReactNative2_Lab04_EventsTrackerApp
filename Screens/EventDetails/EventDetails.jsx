@@ -23,6 +23,7 @@ export const EventDetails = ({setter, uid}) => {
 
     // Function to update the event data in Firebase and locally
     const updateEvent = () => {
+        // TODO: code function to update event in state variable
         // TODO: code function to update the event in Firebase
     }
 
@@ -59,11 +60,6 @@ export const EventDetails = ({setter, uid}) => {
         setIsProcessing(false)
     }
 
-    if(isOwnEvent){
-        // return an editable version
-
-    }
-
     return(
         <View style={{
             flex: 1,
@@ -91,7 +87,7 @@ export const EventDetails = ({setter, uid}) => {
                 <TouchableHighlight
                 activeOpacity={0.6}
                 underlayColor={'yellow'}
-                onPress={()=>{console.log("Edit pressed")}}
+                onPress={updateEvent}
                 disabled={isProcessing}
                 >
                 <Text style={styles.btnText}>Edit event</Text>
