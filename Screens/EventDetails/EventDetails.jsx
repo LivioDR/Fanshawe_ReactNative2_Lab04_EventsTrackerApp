@@ -41,7 +41,9 @@ export const EventDetails = ({setter, uid}) => {
                 if(newData[i].id === eventData.id){
                     newData[i] = {...eventData}
                     delete newData[i].relativeTime
-                    console.log(newData[i])
+                    if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(newData[i].starts)){
+                        newData[i].starts = event.starts
+                    }
                 }
             }
             return newData
