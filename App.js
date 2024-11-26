@@ -43,6 +43,15 @@ export default function App() {
 
   },[])
 
+  const sortEvents = () => {
+    setEvents(prev => 
+      prev.sort((a,b) => { return new Date(a.starts).getTime() - new Date(b.starts).getTime()}))
+  }
+
+  useEffect(()=>{
+    sortEvents()
+  },[events])
+
 
   if(!user){
     return (
