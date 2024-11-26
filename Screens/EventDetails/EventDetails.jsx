@@ -1,6 +1,6 @@
 // React imports
-import { View, Text, TouchableHighlight } from "react-native";
-import { useState } from "react";
+import { View, Text, TouchableHighlight, TextInput } from "react-native";
+import { useState, useEffect } from "react";
 
 // Navigation imports
 import { useRoute } from "@react-navigation/native";
@@ -19,12 +19,35 @@ export const EventDetails = ({setter, uid}) => {
     // setting local state variables to handle UI changes when the data changes
     const [isOwnEvent, setIsOwnEvent] = useState(uid === event.createdBy ? true : false)
     const [eventData, setEventData] = useState(event)
+    const [editMode, setEditMode] = useState(false)
     const [isProcessing, setIsProcessing] = useState(false)
+
+    // DEBUG ONLY. TODO: REMOVE AFTER TESTING
+    useEffect(()=>{
+        console.log(eventData)
+    },[eventData])
+    // DEBUG ONLY
+
 
     // Function to update the event data in Firebase and locally
     const updateEvent = () => {
-        // TODO: code function to update event in state variable
-        // TODO: code function to update the event in Firebase
+        // TODO: code function to update the event in Firebase (remove relativeTime key before sending)
+        
+        
+        // update event in state variable
+        setter(prev => {
+            let newData = [...prev]
+            for(let i=0; i<newData.length; i++){
+                if(newData[i].id === eventData.id){
+                    newData[i] = {...eventData}
+                    delete newData[i].relativeTime
+                    console.log(newData[i])
+                }
+            }
+            return newData
+        })
+
+        setEditMode(false)
     }
 
     // Function to update the favorite status in Firebase and locally
@@ -60,6 +83,91 @@ export const EventDetails = ({setter, uid}) => {
         setIsProcessing(false)
     }
 
+    // EDIT MODE FOR THE EVENT
+    if(editMode){
+        return(
+            <View style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'black',
+            }}>
+                <TextInput
+                style={styles.title}
+                value={eventData.name}
+                onChange={(e) => {
+                    console.log(e.nativeEvent.text)
+                    setEventData(prev => {
+                        let newData = {...prev}
+                        newData.name = e.nativeEvent.text
+                        return newData
+                    })
+                }}
+                />
+                <View style={styles.detailContainer}>
+                    <Ionicons name="calendar-outline" size={styles.icons.size} color={'purple'} />
+                    <View style={styles.detailTextWrapper}>
+                        <TextInput 
+                        style={styles.detailText}
+                        value={eventData.starts}
+                        onChange={(e) => {
+                            setEventData(prev => {
+                                let newData = {...prev}
+                                newData.starts = e.nativeEvent.text
+                                return newData
+                            })
+                        }}
+                        />
+                    </View>
+                </View>
+                <View style={styles.detailContainer}>
+                    <Ionicons name="location-outline" size={styles.icons.size} color={'red'} />
+                    <View style={styles.detailTextWrapper}>
+                        <TextInput 
+                        style={styles.detailText}
+                        value={eventData.location}
+                        onChange={(e)=>{
+                            setEventData(prev => {
+                                let newData = {...prev}
+                                newData.location = e.nativeEvent.text
+                                return newData
+                            })
+                        }}
+                        />
+                    </View>
+                </View>
+                <View style={styles.btn}>
+
+                    {/* Cancel button */}
+                    <TouchableHighlight
+                    activeOpacity={0.6}
+                    underlayColor={'yellow'}
+                    onPress={()=>{
+                        setEventData(event)
+                        setEditMode(false)
+                    }}
+                    disabled={isProcessing}
+                    >
+                    <Text style={styles.btnText}>Cancel</Text>
+                    </TouchableHighlight>
+
+                    {/* Save button */}
+                    <TouchableHighlight
+                        activeOpacity={0.6}
+                        underlayColor={'yellow'}
+                        onPress={updateEvent}
+                        disabled={isProcessing}
+                    >
+                        <Text style={styles.btnText}>Save</Text>
+                    </TouchableHighlight>
+                </View>
+            </View>
+        )
+    }
+    // END OF EDIT MODE RETURN
+
+
+    // VIEW ONLY MODE FOR THE EVENT
     return(
         <View style={{
             flex: 1,
@@ -87,7 +195,7 @@ export const EventDetails = ({setter, uid}) => {
                 <TouchableHighlight
                 activeOpacity={0.6}
                 underlayColor={'yellow'}
-                onPress={updateEvent}
+                onPress={()=>{setEditMode(true)}}
                 disabled={isProcessing}
                 >
                 <Text style={styles.btnText}>Edit event</Text>
