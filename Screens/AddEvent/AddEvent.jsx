@@ -8,6 +8,7 @@ import styles from "./AddEventStyles";
 
 // Functions imports
 import { isDateValid, isTimeValid } from "../../services/inputValidation";
+import uuid from 'react-native-uuid';
 
 
 export const AddEvent = ({uid, visible, hide, setter}) => {
@@ -17,11 +18,10 @@ export const AddEvent = ({uid, visible, hide, setter}) => {
         name: "",
         date: "",
         time: "",
-        // starts: `${dataToAdd?.date}T${dataToAdd?.time}`,
         location: "",
         favorites: [],
         createdBy: uid,
-        id: new Date().getTime(),
+        id: uuid.v4(),
     }
 
     const [isProcessing, setIsProcessing] = useState(false)
