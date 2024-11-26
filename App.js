@@ -1,8 +1,15 @@
+// React imports
 import { useState, useEffect } from 'react';
+
+// Screens and components imports
 import { LoginScreen } from './Screens/LoginScreen/LoginScreen';
-import { isUserLoggedIn, logout } from './services/authentication';
+import { logout } from './services/authentication';
 import { EventTabsScreen } from './Screens/EventTabsScreen/EventTabsScreen';
 import { eventsPlaceholder } from './utilities/eventsPlaceholder';
+
+// Config and database imports
+import { auth } from './config/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function App() {
 
@@ -11,10 +18,11 @@ export default function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
-    (async() => {
-      const authStatus = await isUserLoggedIn()
-      if(authStatus.success){
-        setUser(authStatus.message)
+    // subscribe to the onAuthStateChanged event
+    const loginSub = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // and if the user is authenticated, moves to the next screen
+        setUser(user.uid)
       }
 
     // get events from Firebase
@@ -25,6 +33,9 @@ export default function App() {
     },2500)
 
     })()
+
+    // clean up when unmounting
+    return loginSub
 
   },[])
 
