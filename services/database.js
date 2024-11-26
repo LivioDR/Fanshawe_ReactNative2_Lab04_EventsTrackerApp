@@ -21,6 +21,7 @@ const updateEventById = (id, data) => {
 
 }
 
+// Function to add a new event to the database
 const addNewEvent = async(data) => {
     const id = String(data.id)
     const event = {
@@ -40,6 +41,7 @@ const addNewEvent = async(data) => {
 
 }
 
+// Function to delete an event from the database
 const deleteEventById = async(id) => {
     await deleteDoc(doc(db, collectionName, id));
 }
