@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -27,6 +27,11 @@ export const EventCard = ({name, starts, uid, id, createdBy, favorites, location
             relativeTime: relativeTime,
         })
     }
+
+    // Changes the icon on the card every time that the favorites parameter is changed
+    useEffect(()=>{
+        setIsFav(favorites.includes(uid))
+    },[favorites])
 
     if(interactive){
         return(
