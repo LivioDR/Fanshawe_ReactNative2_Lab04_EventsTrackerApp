@@ -86,6 +86,17 @@ export const EventDetails = ({setter, uid}) => {
                 </View>
             </View>
             <View style={styles.btn}>
+                {
+                    isOwnEvent &&
+                <TouchableHighlight
+                activeOpacity={0.6}
+                underlayColor={'yellow'}
+                onPress={()=>{console.log("Edit pressed")}}
+                disabled={isProcessing}
+                >
+                <Text style={styles.btnText}>Edit event</Text>
+                </TouchableHighlight>
+                }
                 <TouchableHighlight
                     activeOpacity={0.6}
                     underlayColor={'yellow'}

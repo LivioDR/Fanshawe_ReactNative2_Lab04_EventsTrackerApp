@@ -29,11 +29,14 @@ export default EventDetailsStyles = StyleSheet.create({
         color: 'white',
     },
     btn: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
         marginTop: 50,
-        backgroundColor: 'gold',
-        borderRadius: 10,
     },
     btnText: {
+        borderRadius: 10,
+        backgroundColor: 'gold',
         color: 'black',
         fontSize: 18,
         padding: 20,
