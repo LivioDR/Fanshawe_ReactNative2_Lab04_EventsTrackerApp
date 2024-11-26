@@ -5,11 +5,11 @@ import { useState, useEffect } from 'react';
 import { LoginScreen } from './Screens/LoginScreen/LoginScreen';
 import { logout } from './services/authentication';
 import { EventTabsScreen } from './Screens/EventTabsScreen/EventTabsScreen';
-import { eventsPlaceholder } from './utilities/eventsPlaceholder';
 
 // Config and database imports
 import { auth } from './config/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
+import { getAllEvents } from './services/database';
 
 export default function App() {
 
@@ -18,6 +18,18 @@ export default function App() {
   const [loading, setLoading] = useState(true)
 
   useEffect(()=>{
+    // get events from Firebase
+    (async()=>{
+      // getting all the events from Firebase
+      const events = await getAllEvents()
+      // then sorting them by starting time
+      events.sort((a,b) => { return new Date(a.starts).getTime() - new Date(b.starts).getTime()})
+      // to finally add them to the state hook and dismiss the loading spinner
+      setEvents(events)
+      setLoading(false)
+
+    })()    
+    
     // subscribe to the onAuthStateChanged event
     const loginSub = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
@@ -25,14 +37,6 @@ export default function App() {
         setUser(firebaseUser.uid)
       }
     })
-
-    // get events from Firebase
-    // TODO: change placeholder to actual data
-    setEvents(eventsPlaceholder)
-    setTimeout(()=>{
-      setLoading(false)
-    },500)
-
 
     // clean up when unmounting
     return loginSub
