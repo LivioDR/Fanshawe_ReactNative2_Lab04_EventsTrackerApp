@@ -2,12 +2,12 @@ import { FlatList, View } from "react-native";
 import { EventCard } from "./EventCard/EventCard";
 import { AddEvent } from "../AddEvent/AddEvent";
 
-export const EventsScreen = ({events,uid, showModal, hideModal}) => {
+export const EventsScreen = ({events,uid, showModal, hideModal, setter}) => {
     return(
         <View style={{
             backgroundColor: '#202020',
         }}>
-            <AddEvent uid={uid} visible={showModal} hide={hideModal}/>
+            <AddEvent uid={uid} visible={showModal} hide={hideModal} setter={setter}/>
             <FlatList
                 data={events}
                 keyExtractor={item => item.id}

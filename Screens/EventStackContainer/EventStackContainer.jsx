@@ -11,7 +11,7 @@ export const EventStackContainer = ({events, setter, uid, showModal, hideModal})
         <Stack.Navigator initialRouteName="Events List">
             <Stack.Screen
                 name="Events List"
-                children={() => <EventsScreen events={events} uid={uid} showModal={showModal} hideModal={hideModal}/>}
+                children={() => <EventsScreen events={events} uid={uid} showModal={showModal} hideModal={hideModal} setter={setter}/>}
                 options={{
                     headerShown: false,
                 }}

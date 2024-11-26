@@ -14,6 +14,8 @@ export default AddEventStyles = StyleSheet.create({
         backgroundColor: 'lightgrey',
         marginBottom: 20,
         fontSize: 18,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
     },
     dateLabel: {
         color: 'white',
@@ -40,7 +42,7 @@ export default AddEventStyles = StyleSheet.create({
     detailText: {
         backgroundColor: 'lightgrey',
         paddingHorizontal: 10,
-        color: 'white',
+        color: 'black',
         marginBottom: 10,
         width: '100%',
         fontSize: 18,
@@ -59,5 +61,12 @@ export default AddEventStyles = StyleSheet.create({
         fontSize: 18,
         padding: 20,
         marginVertical: 0,
-    }
+    },
+    error: {
+        color: 'red',
+        fontSize: 16,
+        flexWrap: 'wrap',
+        width: '80%',
+        textAlign: 'center',
+    },
 })

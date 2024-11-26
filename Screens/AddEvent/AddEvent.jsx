@@ -1,3 +1,4 @@
+// React imports
 import { useState } from "react";
 import { View, Text, TextInput, Modal, TouchableHighlight } from "react-native";
 
@@ -5,16 +6,28 @@ import { View, Text, TextInput, Modal, TouchableHighlight } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import styles from "./AddEventStyles";
 
+// Functions imports
+import { isDateValid, isTimeValid } from "../../services/inputValidation";
 
 
-export const AddEvent = ({uid, visible, hide}) => {
+export const AddEvent = ({uid, visible, hide, setter}) => {
 
-    const [name, setName] = useState("")
-    const [date, setDate] = useState()
-    const [hour, setHour] = useState()
-    const [location, setLocation] = useState("")
+    // creating an initial object to be used as a starting point for this form
+    const initialData = {
+        name: "",
+        date: "",
+        time: "",
+        // starts: `${dataToAdd?.date}T${dataToAdd?.time}`,
+        location: "",
+        favorites: [],
+        createdBy: uid,
+        id: new Date().getTime(),
+    }
+
     const [isProcessing, setIsProcessing] = useState(false)
-    
+    const [error, setError] = useState("")
+
+    const [dataToAdd, setDataToAdd] = useState(initialData)
 
     const cancel = () => {
         hide()
@@ -22,13 +35,59 @@ export const AddEvent = ({uid, visible, hide}) => {
 
     const save = () => {
         setIsProcessing(true)
-        // TODO: create data structure
+        setError("")
+
+        // START OF VALIDATION OF INPUTS
+        // Event name
+        if(!dataToAdd.name || dataToAdd.name.trim() == ""){
+            setError("Please enter a name for the event")
+            setIsProcessing(false)
+            return false
+        }
+        // Date
+        if(!isDateValid(dataToAdd.date.trim())){
+            setError("Please enter a valid date in the format YYYY-MM-DD")
+            setIsProcessing(false)
+            return false
+        }
+        // Time
+        if(!isTimeValid(dataToAdd.time.trim())){
+            setError("Please enter a valid time in the format HH:MM:SS")
+            setIsProcessing(false)
+            return false
+        }
+        // Location
+        if(!dataToAdd.location){
+            setError("Please enter a location")
+            setIsProcessing(false)
+            return false
+        }
+        // END OF VALIDATION
+
+        // refactor `dataToAdd` to match the object structure
+        const formattedData = {
+            name: dataToAdd.name,
+            starts: `${dataToAdd.date.trim()}T${dataToAdd.time.trim()}`,
+            location: dataToAdd.location,
+            favorites: [],
+            createdBy: uid,
+            id: dataToAdd.id,
+        }
+
 
         // TODO: add data to Firestore
 
-        // TODO: add data locally
 
+        // add data locally
+        setter(prev => {
+            let newData = [...prev]
+            newData.push(formattedData)
+            return newData
+        })
 
+        // clear the form
+        setDataToAdd(initialData)
+        // remove processing flag and hide the modal
         setIsProcessing(false)
         hide()
     }
@@ -46,11 +105,16 @@ export const AddEvent = ({uid, visible, hide}) => {
                 alignItems: 'center',
                 backgroundColor: 'black',
             }}>
-                <Text style={styles.title}>Event Name</Text>
+                <Text style={styles.title}>Event</Text>
                 <TextInput
                 style={styles.titleInput}
-                value={name}
-                onChange={setName}
+                value={dataToAdd.name}
+                onChange={(e) => setDataToAdd(prev=> {
+                    newData = {...prev}
+                    newData.name = e.nativeEvent.text
+                    return newData
+                })}
+                placeholder="Enter a name for the event"
                 />
                 <Text style={styles.dateLabel}>Date and time</Text>
                 <View style={styles.detailContainer}>
@@ -58,14 +122,22 @@ export const AddEvent = ({uid, visible, hide}) => {
                     <View style={styles.detailTextWrapper}>
                         <TextInput 
                         style={styles.detailText}
-                        value={date}
-                        onChange={setDate}
+                        value={dataToAdd.date}
+                        onChange={(e) => setDataToAdd(prev=> {
+                            newData = {...prev}
+                            newData.date = e.nativeEvent.text
+                            return newData
+                        })}
                         placeholder="Date (YYYY-MM-DD)"
                         />
                         <TextInput 
                         style={styles.detailText}
-                        value={hour}
-                        onChange={setHour}
+                        value={dataToAdd.time}
+                        onChange={(e) => setDataToAdd(prev=> {
+                            newData = {...prev}
+                            newData.time = e.nativeEvent.text
+                            return newData
+                        })}
                         placeholder="Time (HH:MM:SS)"
                         />
                     </View>
@@ -76,12 +148,17 @@ export const AddEvent = ({uid, visible, hide}) => {
                     <View style={styles.detailTextWrapper}>
                         <TextInput 
                         style={styles.detailText}
-                        value={location}
-                        onChange={setLocation}
+                        value={dataToAdd.location}
+                        onChange={(e) => setDataToAdd(prev=> {
+                            newData = {...prev}
+                            newData.location = e.nativeEvent.text
+                            return newData
+                        })}
                         placeholder="Enter the location"
                         />
                     </View>
                 </View>
+                <Text style={styles.error}>{error}</Text>
                 <View style={styles.btn}>
                     {/* Cancel button */}
                     <TouchableHighlight
