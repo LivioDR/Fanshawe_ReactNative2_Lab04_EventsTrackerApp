@@ -2,26 +2,6 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthState
 import { auth } from "../config/firebase";
 
 
-// Function to check if the user is currently logged in or not
-// If it is logged in, it returns true and the uid
-const isUserLoggedIn = async() => {
-    const response = {
-        success: false,
-        message: "",
-    }
-    
-    const status = await onAuthStateChanged(auth, (user) => {
-        if (user) {
-            response.success = true
-            response.message = user.uid
-        } else {
-            response.success = false
-        }
-    })
-
-    return response
-}
-
 // Function to log in a user
 // Returns an object with a boolean success value and a message
 const login = async(email, password) => {
@@ -118,4 +98,4 @@ const areFieldsValid = (email, password) => {
     return response
 }
 
-export { areFieldsValid, isUserLoggedIn, login, logout, signUp }
+export { areFieldsValid, login, logout, signUp }

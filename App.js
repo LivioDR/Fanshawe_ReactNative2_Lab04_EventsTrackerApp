@@ -1,19 +1,33 @@
+// React imports
 import { useState, useEffect } from 'react';
+
+// Screens and components imports
 import { LoginScreen } from './Screens/LoginScreen/LoginScreen';
-import { isUserLoggedIn } from './services/authentication';
+
+// Placeholders and mock data imports
+// TODO: remove after linking app to Firestore
 import LoggedInPlaceholder from './Screens/LoggedInPlaceholder';
+
+// Config and database imports
+import { auth } from './config/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function App() {
 
   const [user, setUser] = useState(undefined)
 
   useEffect(()=>{
-    (async() => {
-      const authStatus = await isUserLoggedIn()
-      if(authStatus.success){
-        setUser(authStatus.message)
+    // subscribe to the onAuthStateChanged event
+    const loginSub = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // and if the user is authenticated, moves to the next screen
+        setUser(user.uid)
       }
-    })()
+    })
+
+    // clean up when unmounting
+    return loginSub
+
   },[])
 
 
