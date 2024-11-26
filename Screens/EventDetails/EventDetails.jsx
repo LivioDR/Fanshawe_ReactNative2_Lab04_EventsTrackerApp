@@ -11,7 +11,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import styles from "./EventDetailsStyles";
 
 // Database imports
-import { updateEventInDb } from '../../services/database.js' 
+import { updateEventInDb, deleteEventById } from '../../services/database.js' 
 
 
 export const EventDetails = ({setter, uid}) => {
@@ -56,7 +56,7 @@ export const EventDetails = ({setter, uid}) => {
     }
 
     // Function to remove the event in Firebase and locally
-    const removeEvent = () => {
+    const removeEvent = async() => {
         setIsProcessing(true)
 
         // removes the event locally
@@ -66,7 +66,8 @@ export const EventDetails = ({setter, uid}) => {
             return newData
         })
 
-        // TODO: remove event from Firebase with ID
+        // remove event from Firebase with ID
+        await deleteEventById(eventData.id)
 
 
         // enabling again the buttons
