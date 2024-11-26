@@ -9,6 +9,7 @@ import styles from "./AddEventStyles";
 // Functions imports
 import { isDateValid, isTimeValid } from "../../services/inputValidation";
 import uuid from 'react-native-uuid';
+import { addNewEvent } from "../../services/database";
 
 
 export const AddEvent = ({uid, visible, hide, setter}) => {
@@ -30,10 +31,11 @@ export const AddEvent = ({uid, visible, hide, setter}) => {
     const [dataToAdd, setDataToAdd] = useState(initialData)
 
     const cancel = () => {
+        setDataToAdd(initialData)
         hide()
     }
 
-    const save = () => {
+    const save = async() => {
         setIsProcessing(true)
         setError("")
 
@@ -75,7 +77,8 @@ export const AddEvent = ({uid, visible, hide, setter}) => {
         }
 
 
-        // TODO: add data to Firestore
+        // add the formatted data to the database
+        await addNewEvent(formattedData)
 
 
         // add data locally
