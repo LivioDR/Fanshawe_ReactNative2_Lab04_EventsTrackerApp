@@ -3,6 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import styles from "./EventCardStyles";
+import { toggleFavoriteById } from "../../../services/database";
 const moment = require('moment')
 
 
@@ -28,7 +29,7 @@ export const EventCard = ({name, starts, uid, id, createdBy, favorites, location
         })
     }
 
-    const removeFavorite = () => {
+    const removeFavorite = async() => {
         // Removes the favorite from the state variable
         setter(prev => {
             let newData = [...prev]
@@ -40,7 +41,8 @@ export const EventCard = ({name, starts, uid, id, createdBy, favorites, location
             return newData
         })
         
-        // TODO: remove favorite from Firebase
+        // Removes the favorite from Firebase
+        await toggleFavoriteById(id, uid)
     }
 
     // Changes the icon on the card every time that the favorites parameter is changed
