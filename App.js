@@ -31,7 +31,7 @@ export default function App() {
     setEvents(eventsPlaceholder)
     setTimeout(()=>{
       setLoading(false)
-    },2500)
+    },500)
 
 
     // clean up when unmounting
