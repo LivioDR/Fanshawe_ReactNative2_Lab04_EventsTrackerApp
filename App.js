@@ -19,11 +19,12 @@ export default function App() {
 
   useEffect(()=>{
     // subscribe to the onAuthStateChanged event
-    const loginSub = onAuthStateChanged(auth, (user) => {
-      if (user) {
+    const loginSub = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
         // and if the user is authenticated, moves to the next screen
-        setUser(user.uid)
+        setUser(firebaseUser.uid)
       }
+    })
 
     // get events from Firebase
     // TODO: change placeholder to actual data
@@ -32,7 +33,6 @@ export default function App() {
       setLoading(false)
     },2500)
 
-    })()
 
     // clean up when unmounting
     return loginSub
