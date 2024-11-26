@@ -3,11 +3,23 @@ import { StyleSheet } from "react-native";
 
 export default AddEventStyles = StyleSheet.create({
     title: {
-        fontSize: 32,
+        width: '80%',
+        fontSize: 24,
         flexWrap: 'wrap',
-        textAlign: 'center',
-        marginBottom: 20,
+        textAlign: 'flex-start',
         color: 'white',
+    },
+    titleInput: {
+        width: '80%',
+        backgroundColor: 'lightgrey',
+        marginBottom: 20,
+        fontSize: 18,
+    },
+    dateLabel: {
+        color: 'white',
+        textAlign: 'left',
+        width: '80%',
+        fontSize: 24,
     },
     detailContainer: {
         flexDirection: 'row',
@@ -26,8 +38,13 @@ export default AddEventStyles = StyleSheet.create({
         width: '70%',
     },
     detailText: {
+        backgroundColor: 'lightgrey',
         paddingHorizontal: 10,
         color: 'white',
+        marginBottom: 10,
+        width: '100%',
+        fontSize: 18,
+        paddingVertical: 5,
     },
     btn: {
         width: '100%',

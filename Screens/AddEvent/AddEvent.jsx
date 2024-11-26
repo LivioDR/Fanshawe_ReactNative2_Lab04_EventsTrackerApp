@@ -10,8 +10,8 @@ import styles from "./AddEventStyles";
 export const AddEvent = ({uid, visible, hide}) => {
 
     const [name, setName] = useState("")
-    const [date, setDate] = useState(new Date().toISOString().split("T")[0])
-    const [hour, setHour] = useState(new Date().toISOString().split("T")[1].split(".")[0])
+    const [date, setDate] = useState()
+    const [hour, setHour] = useState()
     const [location, setLocation] = useState("")
     const [isProcessing, setIsProcessing] = useState(false)
     
@@ -46,12 +46,13 @@ export const AddEvent = ({uid, visible, hide}) => {
                 alignItems: 'center',
                 backgroundColor: 'black',
             }}>
+                <Text style={styles.title}>Event Name</Text>
                 <TextInput
-                style={styles.title}
+                style={styles.titleInput}
                 value={name}
                 onChange={setName}
-                placeholder="Event Name"
                 />
+                <Text style={styles.dateLabel}>Date and time</Text>
                 <View style={styles.detailContainer}>
                     <Ionicons name="calendar-outline" size={styles.icons.size} color={'purple'} />
                     <View style={styles.detailTextWrapper}>
@@ -59,14 +60,17 @@ export const AddEvent = ({uid, visible, hide}) => {
                         style={styles.detailText}
                         value={date}
                         onChange={setDate}
+                        placeholder="Date (YYYY-MM-DD)"
                         />
                         <TextInput 
                         style={styles.detailText}
                         value={hour}
                         onChange={setHour}
+                        placeholder="Time (HH:MM:SS)"
                         />
                     </View>
                 </View>
+                <Text style={styles.dateLabel}>Location</Text>
                 <View style={styles.detailContainer}>
                     <Ionicons name="location-outline" size={styles.icons.size} color={'red'} />
                     <View style={styles.detailTextWrapper}>
@@ -74,6 +78,7 @@ export const AddEvent = ({uid, visible, hide}) => {
                         style={styles.detailText}
                         value={location}
                         onChange={setLocation}
+                        placeholder="Enter the location"
                         />
                     </View>
                 </View>
