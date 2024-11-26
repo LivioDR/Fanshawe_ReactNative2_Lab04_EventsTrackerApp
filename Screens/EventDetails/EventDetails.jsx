@@ -69,17 +69,18 @@ export const EventDetails = ({setter, uid}) => {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
+            backgroundColor: 'black',
         }}>
             <Text style={styles.title}>{eventData.name}</Text>
             <View style={styles.detailContainer}>
-                <Ionicons name="calendar-outline" size={styles.icons.size} />
+                <Ionicons name="calendar-outline" size={styles.icons.size} color={'purple'} />
                 <View style={styles.detailTextWrapper}>
                     <Text style={styles.detailText}>{eventData.starts.split("T").join(" @ ")}</Text>
                     <Text style={styles.detailText}>({eventData.relativeTime})</Text>
                 </View>
             </View>
             <View style={styles.detailContainer}>
-                <Ionicons name="location-outline" size={styles.icons.size}/>
+                <Ionicons name="location-outline" size={styles.icons.size} color={'red'} />
                 <View style={styles.detailTextWrapper}>
                     <Text style={styles.detailText}>{eventData.location}</Text>
                 </View>

@@ -4,6 +4,9 @@ export default EventDetailsStyles = StyleSheet.create({
     title: {
         fontSize: 32,
         flexWrap: 'wrap',
+        textAlign: 'center',
+        marginBottom: 20,
+        color: 'white',
     },
     detailContainer: {
         flexDirection: 'row',
@@ -11,6 +14,7 @@ export default EventDetailsStyles = StyleSheet.create({
         alignItems: 'center',
         width: '90%',
         marginHorizontal: '5%',
+        marginVertical: 10,
     },
     icons: {
         size: 32,
@@ -22,14 +26,16 @@ export default EventDetailsStyles = StyleSheet.create({
     },
     detailText: {
         paddingHorizontal: 10,
+        color: 'white',
     },
     btn: {
         marginTop: 50,
-        backgroundColor: 'black',
+        backgroundColor: 'gold',
         padding: 20,
         borderRadius: 10,
     },
     btnText: {
-        color: 'white',
+        color: 'black',
+        fontSize: 18,
     }
 })
