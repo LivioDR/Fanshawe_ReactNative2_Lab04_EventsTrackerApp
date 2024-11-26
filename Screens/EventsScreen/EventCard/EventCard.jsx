@@ -51,13 +51,35 @@ export const EventCard = ({name, starts, uid, id, createdBy, favorites, location
     }
 
     return(
-        <View style={styles.container}>
-            <View style={styles.dateRow}>
-                <Text style={styles.date}>{starts.split("T").join(" @ ")}</Text>
-                {isFav ? <Ionicons name="star" color={'gold'} size={16} /> : <></>}
+        <View style={{
+            ...styles.container,
+            flexDirection: 'row-reverse',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            padding: 0,
+        }}>
+            <Pressable
+                onPress={()=>{
+                    console.log("Fav touched!", id)
+                }}
+                style={{
+                    width: '10%',
+                    alignItems: 'center',
+                    marginHorizontal: 5,
+                }}
+                >
+                    <View>
+                        <Ionicons name="trash" size={24} color={'red'} style={{paddingVertical: 10, }}/>
+                    </View>
+            </Pressable>
+            <View style={{...styles.container, width: '80%', margin: 0, padding: 0,}}>
+                <View style={styles.dateRow}>
+                    <Text style={styles.date}>{starts.split("T").join(" @ ")}</Text>
+                    {isFav ? <Ionicons name="star" color={'gold'} size={16} /> : <></>}
+                </View>
+                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.relative}>{relativeTime}</Text>
             </View>
-            <Text style={styles.title}>{name}</Text>
-            <Text style={styles.relative}>{relativeTime}</Text>
         </View>
     )
 }
