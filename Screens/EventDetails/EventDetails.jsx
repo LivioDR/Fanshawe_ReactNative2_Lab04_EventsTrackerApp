@@ -10,6 +10,9 @@ import { useRoute } from "@react-navigation/native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import styles from "./EventDetailsStyles";
 
+// Database imports
+import { updateEventInDb } from '../../services/database.js' 
+
 
 export const EventDetails = ({setter, uid}) => {
 
@@ -28,9 +31,11 @@ export const EventDetails = ({setter, uid}) => {
 
 
     // Function to update the event data in Firebase and locally
-    const updateEvent = () => {
-        // TODO: code function to update the event in Firebase (remove relativeTime key before sending)
-        
+    const updateEvent = async() => {
+        // update the event in Firebase (removing relativeTime key before sending it)
+        const dataForDb = {...eventData}
+        delete dataForDb.relativeTime
+        await updateEventInDb(dataForDb)
         
         // update event in state variable
         setter(prev => {
