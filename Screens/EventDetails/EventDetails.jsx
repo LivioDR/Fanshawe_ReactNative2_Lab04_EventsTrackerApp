@@ -7,34 +7,8 @@ import { useRoute } from "@react-navigation/native";
 
 // Styling imports
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { StyleSheet } from "react-native";
+import styles from "./EventDetailsStyles";
 
-
-const styles = StyleSheet.create({
-    title: {
-        fontSize: 32,
-        flexWrap: 'wrap',
-    },
-    detailContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        width: '90%',
-        marginHorizontal: '5%',
-    },
-    icons: {
-        size: 32,
-    },
-    detailTextWrapper: {
-        alignItems: 'flex-start',
-        padding: 10,
-        width: '70%',
-        backgroundColor: 'yellow',
-    },
-    detailText: {
-        paddingHorizontal: 10,
-    },
-})
 
 export const EventDetails = ({setter, uid}) => {
 
@@ -42,11 +16,10 @@ export const EventDetails = ({setter, uid}) => {
     const route = useRoute()
     const event = route.params
 
-    console.log(event)
-
     // setting local state variables to handle UI changes when the data changes
     const [isOwnEvent, setIsOwnEvent] = useState(uid === event.createdBy ? true : false)
     const [eventData, setEventData] = useState(event)
+    const [isProcessing, setIsProcessing] = useState(false)
 
     // Function to update the event data in Firebase and locally
     const updateEvent = () => {
@@ -55,11 +28,9 @@ export const EventDetails = ({setter, uid}) => {
 
     // Function to update the favorite status in Firebase and locally
     const toggleFav = () => {
+        setIsProcessing(true)
         // Updates the favorite status in the state variable
         setter(prev => {
-
-            console.log(prev)
-
             let newData = [...prev]
             for(let i=0; i<newData.length; i++){
                 if(newData[i].id === event.id){
@@ -85,6 +56,7 @@ export const EventDetails = ({setter, uid}) => {
             return newData
         })
         // TODO: code function to toggle fav in Firebase
+        setIsProcessing(false)
     }
 
     if(isOwnEvent){
@@ -112,13 +84,14 @@ export const EventDetails = ({setter, uid}) => {
                     <Text style={styles.detailText}>{eventData.location}</Text>
                 </View>
             </View>
-            <View>
+            <View style={styles.btn}>
                 <TouchableHighlight
                     activeOpacity={0.6}
                     underlayColor={'teal'}
                     onPress={toggleFav}
+                    disabled={isProcessing}
                 >
-                    <Text>{eventData.favorites.includes(uid) ? "Remove from favorites" : "Add to favorites"}</Text>
+                    <Text style={styles.btnText}>{eventData.favorites.includes(uid) ? "Remove from favorites" : "Add to favorites"}</Text>
                 </TouchableHighlight>
             </View>
         </View>
