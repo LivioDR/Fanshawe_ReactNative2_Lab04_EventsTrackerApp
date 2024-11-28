@@ -16,7 +16,7 @@ export default EventCardStyles = StyleSheet.create({
     },
     title: {
         fontSize: 22,
-        fontWeight: 800,
+        fontWeight: 'bold',
         flexWrap: 'wrap',
         color: '#f0f0f0',
     },

@@ -13,7 +13,7 @@ export default LoginScreenStyles = StyleSheet.create({
         color: 'white',
         marginTop: 100,
         fontSize: 30,
-        fontWeight: 100,
+        fontWeight: 'thin',
     },
     formContainer: {
         width: '90%',
@@ -23,7 +23,7 @@ export default LoginScreenStyles = StyleSheet.create({
     },
     label: {
         fontSize: 20,
-        fontWeight: 800,
+        fontWeight: 'bold',
         paddingTop: 12,
         paddingBottom: 5,
         color: 'white',
